@@ -27,8 +27,8 @@
 // Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
 
-#include "internal.h"
-#include "mappings.h"
+#include "libglfw/internal.h"
+#include "libglfw/mappings.h"
 
 #include <assert.h>
 #include <float.h>

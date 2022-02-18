@@ -24,7 +24,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "getopt/getopt.h"
+#include "libglfw/getopt/getopt.h"
 
 #include <stddef.h>
 #include <string.h>

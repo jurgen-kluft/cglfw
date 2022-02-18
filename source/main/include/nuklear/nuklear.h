@@ -1042,7 +1042,7 @@ NK_API void nk_input_end(struct nk_context*);
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c
 /// //[... other defines ...]
 /// #define NK_ZERO_COMMAND_MEMORY
-/// #include "nuklear/.h"
+/// #include "libglfw/nuklear/.h"
 /// //
 /// // setup context
 /// struct nk_context ctx;

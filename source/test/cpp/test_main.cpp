@@ -1,10 +1,10 @@
-#include "libglfw/xbase/x_base.h"
-#include "libglfw/xbase/x_allocator.h"
-#include "libglfw/xbase/x_console.h"
-#include "libglfw/xbase/x_context.h"
+#include "libglfw/libglfw/xbase/x_base.h"
+#include "libglfw/libglfw/xbase/x_allocator.h"
+#include "libglfw/libglfw/xbase/x_console.h"
+#include "libglfw/libglfw/xbase/x_context.h"
 
-#include "libglfw/xunittest/xunittest.h"
-#include "libglfw/xunittest/private/ut_ReportAssert.h"
+#include "libglfw/libglfw/xunittest/xunittest.h"
+#include "libglfw/libglfw/xunittest/private/ut_ReportAssert.h"
 
 UNITTEST_SUITE_LIST(xLibGlfwUnitTest);
 UNITTEST_SUITE_DECLARE(xLibGlfwUnitTest, basics);

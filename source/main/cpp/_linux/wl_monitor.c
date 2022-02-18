@@ -26,7 +26,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
-#include "internal.h"
+#include "libglfw/internal.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,7 +34,7 @@
 #include <errno.h>
 #include <math.h>
 
-#include "wayland-client-protocol.h"
+#include "libglfw/wayland-client-protocol.h"
 
 
 static void outputHandleGeometry(void* data,

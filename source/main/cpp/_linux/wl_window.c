@@ -28,7 +28,7 @@
 
 #define _GNU_SOURCE
 
-#include "internal.h"
+#include "libglfw/internal.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,13 +40,13 @@
 #include <sys/timerfd.h>
 #include <poll.h>
 
-#include "wayland-client-protocol.h"
-#include "wayland-xdg-shell-client-protocol.h"
-#include "wayland-xdg-decoration-client-protocol.h"
-#include "wayland-viewporter-client-protocol.h"
-#include "wayland-relative-pointer-unstable-v1-client-protocol.h"
-#include "wayland-pointer-constraints-unstable-v1-client-protocol.h"
-#include "wayland-idle-inhibit-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-client-protocol.h"
+#include "libglfw/wayland-xdg-shell-client-protocol.h"
+#include "libglfw/wayland-xdg-decoration-client-protocol.h"
+#include "libglfw/wayland-viewporter-client-protocol.h"
+#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol.h"
 
 
 static int createTmpfileCloexec(char* tmpname)

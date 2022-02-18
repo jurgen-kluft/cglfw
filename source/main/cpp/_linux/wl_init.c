@@ -26,7 +26,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
-#include "internal.h"
+#include "libglfw/internal.h"
 
 #include <assert.h>
 #include <errno.h>
@@ -40,21 +40,21 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "wayland-client-protocol.h"
-#include "wayland-xdg-shell-client-protocol.h"
-#include "wayland-xdg-decoration-client-protocol.h"
-#include "wayland-viewporter-client-protocol.h"
-#include "wayland-relative-pointer-unstable-v1-client-protocol.h"
-#include "wayland-pointer-constraints-unstable-v1-client-protocol.h"
-#include "wayland-idle-inhibit-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-client-protocol.h"
+#include "libglfw/wayland-xdg-shell-client-protocol.h"
+#include "libglfw/wayland-xdg-decoration-client-protocol.h"
+#include "libglfw/wayland-viewporter-client-protocol.h"
+#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol.h"
 
-#include "wayland-client-protocol-code.h"
-#include "wayland-xdg-shell-client-protocol-code.h"
-#include "wayland-xdg-decoration-client-protocol-code.h"
-#include "wayland-viewporter-client-protocol-code.h"
-#include "wayland-relative-pointer-unstable-v1-client-protocol-code.h"
-#include "wayland-pointer-constraints-unstable-v1-client-protocol-code.h"
-#include "wayland-idle-inhibit-unstable-v1-client-protocol-code.h"
+#include "libglfw/wayland-client-protocol-code.h"
+#include "libglfw/wayland-xdg-shell-client-protocol-code.h"
+#include "libglfw/wayland-xdg-decoration-client-protocol-code.h"
+#include "libglfw/wayland-viewporter-client-protocol-code.h"
+#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol-code.h"
+#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol-code.h"
+#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol-code.h"
 
 
 static inline int min(int n1, int n2)

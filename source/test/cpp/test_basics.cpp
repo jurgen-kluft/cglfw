@@ -1,7 +1,7 @@
-#include "libglfw/xbase/x_target.h"
-#include "libglfw/xbase/x_buffer.h"
+#include "libglfw/libglfw/xbase/x_target.h"
+#include "libglfw/libglfw/xbase/x_buffer.h"
 
-#include "libglfw/xunittest/xunittest.h"
+#include "libglfw/libglfw/xunittest/xunittest.h"
 
 using namespace xcore;
 

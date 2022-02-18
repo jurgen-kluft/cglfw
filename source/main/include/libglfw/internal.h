@@ -28,7 +28,7 @@
 #pragma once
 
 #if defined(_GLFW_USE_CONFIG_H)
- #include "glfw_config.h"
+ #include "libglfw/glfw_config.h"
 #endif
 
 #if defined(GLFW_INCLUDE_GLCOREARB) || \
@@ -46,7 +46,7 @@
 #endif
 
 #define GLFW_INCLUDE_NONE
-#include "../include/GLFW/glfw3.h"
+#include "libglfw/glfw3.h"
 
 #define _GLFW_INSERT_FIRST      0
 #define _GLFW_INSERT_LAST       1
@@ -328,7 +328,7 @@ typedef PFN_vkVoidFunction (APIENTRY * PFN_vkGetInstanceProcAddr)(VkInstance,con
 typedef VkResult (APIENTRY * PFN_vkEnumerateInstanceExtensionProperties)(const char*,uint32_t*,VkExtensionProperties*);
 #define vkGetInstanceProcAddr _glfw.vk.GetInstanceProcAddr
 
-#include "platform.h"
+#include "libglfw/platform.h"
 
 // Constructs a version number string from the public header macros
 #define _GLFW_CONCAT_VERSION(m, n, r) #m "." #n "." #r
