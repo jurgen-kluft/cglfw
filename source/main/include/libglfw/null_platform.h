@@ -25,9 +25,9 @@
 //
 //========================================================================
 
-#define GLFW_NULL_WINDOW_STATE          _GLFWwindowNull  nill;
-#define GLFW_NULL_LIBRARY_WINDOW_STATE  _GLFWlibraryNull nill;
-#define GLFW_NULL_MONITOR_STATE         _GLFWmonitorNull nill;
+#define GLFW_NULL_WINDOW_STATE          _GLFWwindowNull  null;
+#define GLFW_NULL_LIBRARY_WINDOW_STATE  _GLFWlibraryNull null;
+#define GLFW_NULL_MONITOR_STATE         _GLFWmonitorNull null;
 
 #define GLFW_NULL_CONTEXT_STATE
 #define GLFW_NULL_CURSOR_STATE
