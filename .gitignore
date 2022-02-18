@@ -1,0 +1,28 @@
+#ignore all files
+*
+!*/
+
+vendor/
+target/
+
+#except the following files
+!.gitignore
+!.clang-format
+!*.cpp
+!*.hpp
+!*.c
+!*.h
+!*.inl
+!*.m
+!*.in
+
+!*.go
+!*.lua
+
+!*.hlsl
+!*.fragment
+
+!*.ini
+!*.bat
+
+#except the following folders
