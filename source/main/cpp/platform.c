@@ -27,7 +27,7 @@
 // Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
 
-#include "libglfw/internal.h"
+#include "internal.h"
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW internal API                      //////

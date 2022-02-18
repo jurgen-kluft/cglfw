@@ -25,10 +25,10 @@
 //
 //========================================================================
 
-#include "libglfw/null_platform.h"
+#include "null_platform.h"
 
 #if defined(_GLFW_WIN32)
- #include "libglfw/win32_platform.h"
+ #include "win32_platform.h"
 #else
  #define GLFW_WIN32_WINDOW_STATE
  #define GLFW_WIN32_MONITOR_STATE
@@ -39,7 +39,7 @@
 #endif
 
 #if defined(_GLFW_COCOA)
- #include "libglfw/cocoa_platform.h"
+ #include "cocoa_platform.h"
 #else
  #define GLFW_COCOA_WINDOW_STATE
  #define GLFW_COCOA_MONITOR_STATE
@@ -50,7 +50,7 @@
 #endif
 
 #if defined(_GLFW_WAYLAND)
- #include "libglfw/wl_platform.h"
+ #include "wl_platform.h"
 #else
  #define GLFW_WAYLAND_WINDOW_STATE
  #define GLFW_WAYLAND_MONITOR_STATE
@@ -59,7 +59,7 @@
 #endif
 
 #if defined(_GLFW_X11)
- #include "libglfw/x11_platform.h"
+ #include "x11_platform.h"
 #else
  #define GLFW_X11_WINDOW_STATE
  #define GLFW_X11_MONITOR_STATE
@@ -69,49 +69,49 @@
  #define GLFW_GLX_LIBRARY_CONTEXT_STATE
 #endif
 
-#include "libglfw/null_joystick.h"
+#include "null_joystick.h"
 
 #if defined(_GLFW_WIN32)
- #include "libglfw/win32_joystick.h"
+ #include "win32_joystick.h"
 #else
  #define GLFW_WIN32_JOYSTICK_STATE
  #define GLFW_WIN32_LIBRARY_JOYSTICK_STATE
 #endif
 
 #if defined(_GLFW_COCOA)
- #include "libglfw/cocoa_joystick.h"
+ #include "cocoa_joystick.h"
 #else
  #define GLFW_COCOA_JOYSTICK_STATE
  #define GLFW_COCOA_LIBRARY_JOYSTICK_STATE
 #endif
 
 #if (defined(_GLFW_X11) || defined(_GLFW_WAYLAND)) && defined(__linux__)
- #include "libglfw/linux_joystick.h"
+ #include "linux_joystick.h"
 #else
  #define GLFW_LINUX_JOYSTICK_STATE
  #define GLFW_LINUX_LIBRARY_JOYSTICK_STATE
 #endif
 
 #if defined(_WIN32)
- #include "libglfw/win32_thread.h"
+ #include "win32_thread.h"
  #define GLFW_POSIX_TLS_STATE
  #define GLFW_POSIX_MUTEX_STATE
 #else
- #include "libglfw/posix_thread.h"
+ #include "posix_thread.h"
  #define GLFW_WIN32_TLS_STATE
  #define GLFW_WIN32_MUTEX_STATE
 #endif
 
 #if defined(_WIN32)
- #include "libglfw/win32_time.h"
+ #include "win32_time.h"
  #define GLFW_POSIX_LIBRARY_TIMER_STATE
  #define GLFW_COCOA_LIBRARY_TIMER_STATE
 #elif defined(__APPLE__)
- #include "libglfw/cocoa_time.h"
+ #include "cocoa_time.h"
  #define GLFW_WIN32_LIBRARY_TIMER_STATE
  #define GLFW_POSIX_LIBRARY_TIMER_STATE
 #else
- #include "libglfw/posix_time.h"
+ #include "posix_time.h"
  #define GLFW_WIN32_LIBRARY_TIMER_STATE
  #define GLFW_COCOA_LIBRARY_TIMER_STATE
 #endif

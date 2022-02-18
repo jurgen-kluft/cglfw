@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.3 POSIX - www.glfw.org
+// GLFW 3.4 POSIX - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2002-2006 Marcus Geelnard
 // Copyright (c) 2006-2017 Camilla Löwy <elmindreda@glfw.org>
@@ -27,7 +27,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
-#include "libglfw/internal.h"
+#include "internal.h"
 
 #include <assert.h>
 #include <string.h>

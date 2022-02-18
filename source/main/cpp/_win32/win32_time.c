@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.3 Win32 - www.glfw.org
+// GLFW 3.4 Win32 - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2002-2006 Marcus Geelnard
 // Copyright (c) 2006-2017 Camilla Löwy <elmindreda@glfw.org>
@@ -27,24 +27,17 @@
 // Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
 
-#include "libglfw/internal.h"
-
-
-//////////////////////////////////////////////////////////////////////////
-//////                       GLFW internal API                      //////
-//////////////////////////////////////////////////////////////////////////
-
-// Initialise timer
-//
-void _glfwInitTimerWin32(void)
-{
-    QueryPerformanceFrequency((LARGE_INTEGER*) &_glfw.timer.win32.frequency);
-}
+#include "internal.h"
 
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
+
+void _glfwPlatformInitTimer(void)
+{
+    QueryPerformanceFrequency((LARGE_INTEGER*) &_glfw.timer.win32.frequency);
+}
 
 uint64_t _glfwPlatformGetTimerValue(void)
 {

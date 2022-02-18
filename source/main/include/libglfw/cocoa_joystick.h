@@ -1,7 +1,7 @@
 //========================================================================
-// GLFW 3.4 Win32 - www.glfw.org
+// GLFW 3.4 Cocoa - www.glfw.org
 //------------------------------------------------------------------------
-// Copyright (c) 2021 Camilla Löwy <elmindreda@glfw.org>
+// Copyright (c) 2006-2017 Camilla Löwy <elmindreda@glfw.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -23,27 +23,29 @@
 //    distribution.
 //
 //========================================================================
-// Please use C89 style variable declarations in this file because VS 2010
-//========================================================================
 
-#include "internal.h"
+#include <IOKit/IOKitLib.h>
+#include <IOKit/IOCFPlugIn.h>
+#include <IOKit/hid/IOHIDKeys.h>
 
-//////////////////////////////////////////////////////////////////////////
-//////                       GLFW platform API                      //////
-//////////////////////////////////////////////////////////////////////////
+#define GLFW_COCOA_JOYSTICK_STATE         _GLFWjoystickNS ns;
+#define GLFW_COCOA_LIBRARY_JOYSTICK_STATE
 
-void* _glfwPlatformLoadModule(const char* path)
+#define GLFW_BUILD_COCOA_MAPPINGS
+
+// Cocoa-specific per-joystick data
+//
+typedef struct _GLFWjoystickNS
 {
-    return LoadLibraryA(path);
-}
+    IOHIDDeviceRef      device;
+    CFMutableArrayRef   axes;
+    CFMutableArrayRef   buttons;
+    CFMutableArrayRef   hats;
+} _GLFWjoystickNS;
 
-void _glfwPlatformFreeModule(void* module)
-{
-    FreeLibrary((HMODULE) module);
-}
-
-GLFWproc _glfwPlatformGetModuleSymbol(void* module, const char* name)
-{
-    return (GLFWproc) GetProcAddress((HMODULE) module, name);
-}
+GLFWbool _glfwInitJoysticksCocoa(void);
+void _glfwTerminateJoysticksCocoa(void);
+int _glfwPollJoystickCocoa(_GLFWjoystick* js, int mode);
+const char* _glfwGetMappingNameCocoa(void);
+void _glfwUpdateGamepadGUIDCocoa(char* guid);
 

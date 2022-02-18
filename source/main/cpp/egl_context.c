@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.3 EGL - www.glfw.org
+// GLFW 3.4 EGL - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2002-2006 Marcus Geelnard
 // Copyright (c) 2006-2019 Camilla Löwy <elmindreda@glfw.org>
@@ -27,7 +27,7 @@
 // Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
 
-#include "libglfw/internal.h"
+#include "internal.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -103,10 +103,10 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
         return GLFW_FALSE;
     }
 
-    nativeConfigs = (EGLConfig*)calloc(nativeCount, sizeof(EGLConfig));
+    nativeConfigs = (EGLConfig*)_glfw_calloc(nativeCount, sizeof(EGLConfig));
     eglGetConfigs(_glfw.egl.display, nativeConfigs, nativeCount, &nativeCount);
 
-    usableConfigs = (_GLFWfbconfig*)calloc(nativeCount, sizeof(_GLFWfbconfig));
+    usableConfigs = (_GLFWfbconfig*)_glfw_calloc(nativeCount, sizeof(_GLFWfbconfig));
     usableCount = 0;
 
     for (i = 0;  i < nativeCount;  i++)
@@ -123,6 +123,7 @@ static GLFWbool chooseEGLConfig(const _GLFWctxconfig* ctxconfig,
             continue;
 
 #if defined(_GLFW_X11)
+        if (_glfw.platform.platformID == GLFW_PLATFORM_X11)
         {
             XVisualInfo vi = {0};
 

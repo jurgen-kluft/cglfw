@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.4 Win32 - www.glfw.org
+// GLFW 3.4 POSIX - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2021 Camilla Löwy <elmindreda@glfw.org>
 //
@@ -23,10 +23,12 @@
 //    distribution.
 //
 //========================================================================
-// Please use C89 style variable declarations in this file because VS 2010
+// It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
 #include "internal.h"
+
+#include <dlfcn.h>
 
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
@@ -34,16 +36,16 @@
 
 void* _glfwPlatformLoadModule(const char* path)
 {
-    return LoadLibraryA(path);
+    return dlopen(path, RTLD_LAZY | RTLD_LOCAL);
 }
 
 void _glfwPlatformFreeModule(void* module)
 {
-    FreeLibrary((HMODULE) module);
+    dlclose(module);
 }
 
 GLFWproc _glfwPlatformGetModuleSymbol(void* module, const char* name)
 {
-    return (GLFWproc) GetProcAddress((HMODULE) module, name);
+    return dlsym(module, name);
 }
 
