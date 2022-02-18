@@ -27,7 +27,7 @@ freely, subject to the following restrictions:
  * Fixed time retrieval on POSIX systems.
  */
 
-#include "tinycthread.h"
+#include "libglfw/tinycthread.h"
 #include <stdlib.h>
 
 /* Platform specific includes */

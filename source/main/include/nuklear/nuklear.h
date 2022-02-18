@@ -81,7 +81,7 @@
 ///
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~C
 ///     #define NK_IMPLEMENTATION
-///     #include "nuklear.h"
+///     #include "nuklear/.h"
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ///
 /// Also optionally define the symbols listed in the section "OPTIONAL DEFINES"
@@ -1042,7 +1042,7 @@ NK_API void nk_input_end(struct nk_context*);
 /// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c
 /// //[... other defines ...]
 /// #define NK_ZERO_COMMAND_MEMORY
-/// #include "nuklear.h"
+/// #include "nuklear/.h"
 /// //
 /// // setup context
 /// struct nk_context ctx;

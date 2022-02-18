@@ -1,10 +1,10 @@
 package libglfw
 
 import (
-	"github.com/jurgen-kluft/xbase/package"
+	xbase "github.com/jurgen-kluft/xbase/package"
 	"github.com/jurgen-kluft/xcode/denv"
-	"github.com/jurgen-kluft/xentry/package"
-	"github.com/jurgen-kluft/xunittest/package"
+	xentry "github.com/jurgen-kluft/xentry/package"
+	xunittest "github.com/jurgen-kluft/xunittest/package"
 )
 
 // GetPackage returns the package object of 'libglfw'
@@ -30,6 +30,17 @@ func GetPackage() *denv.Package {
 	maintest.Dependencies = append(maintest.Dependencies, xentrypkg.GetMainLib())
 	maintest.Dependencies = append(maintest.Dependencies, xbasepkg.GetMainLib())
 	maintest.Dependencies = append(maintest.Dependencies, mainlib)
+
+	if denv.XCodeOS == "windows" {
+		mainlib.AddDefine("_GLFW_WIN32")
+		maintest.AddDefine("_GLFW_WIN32")
+	} else if denv.XCodeOS == "darwin" {
+		mainlib.AddDefine("_GLFW_COCOA")
+		maintest.AddDefine("_GLFW_COCOA")
+	} else if denv.XCodeOS == "linux" {
+		mainlib.AddDefine("_GLFW_X11")
+		maintest.AddDefine("_GLFW_X11")
+	}
 
 	mainpkg.AddMainLib(mainlib)
 	mainpkg.AddUnittest(maintest)

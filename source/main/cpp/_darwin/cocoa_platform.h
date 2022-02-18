@@ -84,11 +84,11 @@ typedef struct VkMetalSurfaceCreateInfoEXT
 typedef VkResult (APIENTRY *PFN_vkCreateMacOSSurfaceMVK)(VkInstance,const VkMacOSSurfaceCreateInfoMVK*,const VkAllocationCallbacks*,VkSurfaceKHR*);
 typedef VkResult (APIENTRY *PFN_vkCreateMetalSurfaceEXT)(VkInstance,const VkMetalSurfaceCreateInfoEXT*,const VkAllocationCallbacks*,VkSurfaceKHR*);
 
-#include "posix_thread.h"
-#include "cocoa_joystick.h"
-#include "nsgl_context.h"
-#include "egl_context.h"
-#include "osmesa_context.h"
+#include "libglfw/posix_thread.h"
+#include "libglfw/cocoa_joystick.h"
+#include "libglfw/nsgl_context.h"
+#include "libglfw/egl_context.h"
+#include "libglfw/osmesa_context.h"
 
 #define _glfw_dlopen(name) dlopen(name, RTLD_LAZY | RTLD_LOCAL)
 #define _glfw_dlclose(handle) dlclose(handle)

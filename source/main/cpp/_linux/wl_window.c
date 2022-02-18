@@ -28,7 +28,7 @@
 
 #define _GNU_SOURCE
 
-#include "internal.h"
+#include "libglfw/internal.h"
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -37,10 +37,10 @@
 #define _GLFW_EGL_CONTEXT_STATE              struct { int dummyEGLContext; }
 #define _GLFW_EGL_LIBRARY_CONTEXT_STATE      struct { int dummyEGLLibraryContext; }
 
-#include "osmesa_context.h"
-#include "posix_time.h"
-#include "posix_thread.h"
-#include "null_joystick.h"
+#include "libglfw/osmesa_context.h"
+#include "libglfw/posix_time.h"
+#include "libglfw/posix_thread.h"
+#include "libglfw/null_joystick.h"
 
 #if defined(_GLFW_WIN32)
  #define _glfw_dlopen(name) LoadLibraryA(name)

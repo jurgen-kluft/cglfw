@@ -28,7 +28,7 @@
 
 #define _POSIX_C_SOURCE 200809L
 
-#include "internal.h"
+#include "libglfw/internal.h"
 
 #include <assert.h>
 #include <errno.h>

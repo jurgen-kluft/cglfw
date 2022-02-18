@@ -45,23 +45,23 @@ typedef struct VkWaylandSurfaceCreateInfoKHR
 typedef VkResult (APIENTRY *PFN_vkCreateWaylandSurfaceKHR)(VkInstance,const VkWaylandSurfaceCreateInfoKHR*,const VkAllocationCallbacks*,VkSurfaceKHR*);
 typedef VkBool32 (APIENTRY *PFN_vkGetPhysicalDeviceWaylandPresentationSupportKHR)(VkPhysicalDevice,uint32_t,struct wl_display*);
 
-#include "posix_thread.h"
-#include "posix_time.h"
+#include "libglfw/posix_thread.h"
+#include "libglfw/posix_time.h"
 #ifdef __linux__
-#include "linux_joystick.h"
+#include "libglfw/linux_joystick.h"
 #else
-#include "null_joystick.h"
+#include "libglfw/null_joystick.h"
 #endif
-#include "xkb_unicode.h"
-#include "egl_context.h"
-#include "osmesa_context.h"
+#include "libglfw/xkb_unicode.h"
+#include "libglfw/egl_context.h"
+#include "libglfw/osmesa_context.h"
 
-#include "wayland-xdg-shell-client-protocol.h"
-#include "wayland-xdg-decoration-client-protocol.h"
-#include "wayland-viewporter-client-protocol.h"
-#include "wayland-relative-pointer-unstable-v1-client-protocol.h"
-#include "wayland-pointer-constraints-unstable-v1-client-protocol.h"
-#include "wayland-idle-inhibit-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-xdg-shell-client-protocol.h"
+#include "libglfw/wayland-xdg-decoration-client-protocol.h"
+#include "libglfw/wayland-viewporter-client-protocol.h"
+#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol.h"
+#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol.h"
 
 #define _glfw_dlopen(name) dlopen(name, RTLD_LAZY | RTLD_LOCAL)
 #define _glfw_dlclose(handle) dlclose(handle)
