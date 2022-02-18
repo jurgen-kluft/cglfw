@@ -41,8 +41,8 @@
 //
 static int compareVideoModes(const void* fp, const void* sp)
 {
-    const GLFWvidmode* fm = fp;
-    const GLFWvidmode* sm = sp;
+    const GLFWvidmode* fm = (GLFWvidmode*)fp;
+    const GLFWvidmode* sm = (GLFWvidmode*)sp;
     const int fbpp = fm->redBits + fm->greenBits + fm->blueBits;
     const int sbpp = sm->redBits + sm->greenBits + sm->blueBits;
     const int farea = fm->width * fm->height;
@@ -99,8 +99,7 @@ void _glfwInputMonitor(_GLFWmonitor* monitor, int action, int placement)
     if (action == GLFW_CONNECTED)
     {
         _glfw.monitorCount++;
-        _glfw.monitors =
-            realloc(_glfw.monitors, sizeof(_GLFWmonitor*) * _glfw.monitorCount);
+        _glfw.monitors = (_GLFWmonitor**)realloc(_glfw.monitors, sizeof(_GLFWmonitor*) * _glfw.monitorCount);
 
         if (placement == _GLFW_INSERT_FIRST)
         {
@@ -166,7 +165,7 @@ void _glfwInputMonitorWindow(_GLFWmonitor* monitor, _GLFWwindow* window)
 //
 _GLFWmonitor* _glfwAllocMonitor(const char* name, int widthMM, int heightMM)
 {
-    _GLFWmonitor* monitor = calloc(1, sizeof(_GLFWmonitor));
+    _GLFWmonitor* monitor = (_GLFWmonitor*)calloc(1, sizeof(_GLFWmonitor));
     monitor->widthMM = widthMM;
     monitor->heightMM = heightMM;
 
@@ -195,9 +194,9 @@ void _glfwFreeMonitor(_GLFWmonitor* monitor)
 //
 void _glfwAllocGammaArrays(GLFWgammaramp* ramp, unsigned int size)
 {
-    ramp->red = calloc(size, sizeof(unsigned short));
-    ramp->green = calloc(size, sizeof(unsigned short));
-    ramp->blue = calloc(size, sizeof(unsigned short));
+    ramp->red = (unsigned short*)calloc(size, sizeof(unsigned short));
+    ramp->green = (unsigned short*)calloc(size, sizeof(unsigned short));
+    ramp->blue = (unsigned short*)calloc(size, sizeof(unsigned short));
     ramp->size = size;
 }
 
@@ -418,7 +417,7 @@ GLFWAPI void* glfwGetMonitorUserPointer(GLFWmonitor* handle)
 GLFWAPI GLFWmonitorfun glfwSetMonitorCallback(GLFWmonitorfun cbfun)
 {
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
-    _GLFW_SWAP_POINTERS(_glfw.callbacks.monitor, cbfun);
+    _GLFW_SWAP_POINTERS(_glfw.callbacks.monitor, cbfun, GLFWmonitorfun);
     return cbfun;
 }
 
@@ -472,7 +471,7 @@ GLFWAPI void glfwSetGamma(GLFWmonitor* handle, float gamma)
     if (!original)
         return;
 
-    values = calloc(original->size, sizeof(unsigned short));
+    values = (unsigned short*)calloc(original->size, sizeof(unsigned short));
 
     for (i = 0;  i < original->size;  i++)
     {

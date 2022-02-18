@@ -1,8 +1,8 @@
 //========================================================================
-// GLFW 3.3 - www.glfw.org
+// GLFW 3.4 Win32 - www.glfw.org
 //------------------------------------------------------------------------
-// Copyright (c) 2016 Google Inc.
-// Copyright (c) 2016-2017 Camilla Löwy <elmindreda@glfw.org>
+// Copyright (c) 2002-2006 Marcus Geelnard
+// Copyright (c) 2006-2017 Camilla Löwy <elmindreda@glfw.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -24,32 +24,25 @@
 //    distribution.
 //
 //========================================================================
-// It is fine to use C99 in this file because it will not be built with VS
-//========================================================================
 
-#include "libglfw/internal.h"
+#include <windows.h>
 
+#define GLFW_WIN32_TLS_STATE            _GLFWtlsWin32     win32;
+#define GLFW_WIN32_MUTEX_STATE          _GLFWmutexWin32   win32;
 
-//////////////////////////////////////////////////////////////////////////
-//////                       GLFW platform API                      //////
-//////////////////////////////////////////////////////////////////////////
-#if !defined(_GLFW_WIN32)
-
-int _glfwPlatformInit(void)
+// Win32-specific thread local storage data
+//
+typedef struct _GLFWtlsWin32
 {
-    _glfwInitTimerPOSIX();
-    return GLFW_TRUE;
-}
+    GLFWbool            allocated;
+    DWORD               index;
+} _GLFWtlsWin32;
 
-void _glfwPlatformTerminate(void)
+// Win32-specific mutex data
+//
+typedef struct _GLFWmutexWin32
 {
-    _glfwTerminateOSMesa();
-}
-
-const char* _glfwPlatformGetVersionString(void)
-{
-    return _GLFW_VERSION_NUMBER " null OSMesa";
-}
-
-#endif
+    GLFWbool            allocated;
+    CRITICAL_SECTION    section;
+} _GLFWmutexWin32;
 

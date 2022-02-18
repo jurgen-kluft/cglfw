@@ -33,8 +33,8 @@
 static int createNativeWindow(_GLFWwindow* window,
                               const _GLFWwndconfig* wndconfig)
 {
-    window->null.width = wndconfig->width;
-    window->null.height = wndconfig->height;
+    window->nill.width = wndconfig->width;
+    window->nill.height = wndconfig->height;
 
     return GLFW_TRUE;
 }
@@ -106,15 +106,15 @@ void _glfwPlatformSetWindowPos(_GLFWwindow* window, int xpos, int ypos)
 void _glfwPlatformGetWindowSize(_GLFWwindow* window, int* width, int* height)
 {
     if (width)
-        *width = window->null.width;
+        *width = window->nill.width;
     if (height)
-        *height = window->null.height;
+        *height = window->nill.height;
 }
 
 void _glfwPlatformSetWindowSize(_GLFWwindow* window, int width, int height)
 {
-    window->null.width = width;
-    window->null.height = height;
+    window->nill.width = width;
+    window->nill.height = height;
 }
 
 void _glfwPlatformSetWindowSizeLimits(_GLFWwindow* window,
@@ -130,9 +130,9 @@ void _glfwPlatformSetWindowAspectRatio(_GLFWwindow* window, int n, int d)
 void _glfwPlatformGetFramebufferSize(_GLFWwindow* window, int* width, int* height)
 {
     if (width)
-        *width = window->null.width;
+        *width = window->nill.width;
     if (height)
-        *height = window->null.height;
+        *height = window->nill.height;
 }
 
 void _glfwPlatformGetWindowFrameSize(_GLFWwindow* window,

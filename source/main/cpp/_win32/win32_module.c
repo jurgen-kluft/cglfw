@@ -1,8 +1,7 @@
 //========================================================================
-// GLFW 3.3 - www.glfw.org
+// GLFW 3.4 Win32 - www.glfw.org
 //------------------------------------------------------------------------
-// Copyright (c) 2016 Google Inc.
-// Copyright (c) 2016-2017 Camilla Löwy <elmindreda@glfw.org>
+// Copyright (c) 2021 Camilla Löwy <elmindreda@glfw.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -24,32 +23,27 @@
 //    distribution.
 //
 //========================================================================
-// It is fine to use C99 in this file because it will not be built with VS
+// Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
 
 #include "libglfw/internal.h"
 
-
 //////////////////////////////////////////////////////////////////////////
 //////                       GLFW platform API                      //////
 //////////////////////////////////////////////////////////////////////////
-#if !defined(_GLFW_WIN32)
 
-int _glfwPlatformInit(void)
+void* _glfwPlatformLoadModule(const char* path)
 {
-    _glfwInitTimerPOSIX();
-    return GLFW_TRUE;
+    return LoadLibraryA(path);
 }
 
-void _glfwPlatformTerminate(void)
+void _glfwPlatformFreeModule(void* module)
 {
-    _glfwTerminateOSMesa();
+    FreeLibrary((HMODULE) module);
 }
 
-const char* _glfwPlatformGetVersionString(void)
+GLFWproc _glfwPlatformGetModuleSymbol(void* module, const char* name)
 {
-    return _GLFW_VERSION_NUMBER " null OSMesa";
+    return (GLFWproc) GetProcAddress((HMODULE) module, name);
 }
-
-#endif
 
