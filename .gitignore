@@ -17,7 +17,6 @@ target/
 !*.in
 
 !*.go
-!*.lua
 
 !*.hlsl
 !*.fragment
