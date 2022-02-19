@@ -26,6 +26,7 @@
 //========================================================================
 // Please use C89 style variable declarations in this file because VS 2010
 //========================================================================
+#if 1
 
 #include "libglfw/internal.h"
 
@@ -328,3 +329,4 @@ GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance,
     return _glfw.platform.createWindowSurface(instance, window, allocator, surface);
 }
 
+#endif
