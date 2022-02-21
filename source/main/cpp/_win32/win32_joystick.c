@@ -368,7 +368,7 @@ static BOOL CALLBACK deviceCallback(const DIDEVICEINSTANCE* di, void* user)
         return DIENUM_CONTINUE;
 
     if (FAILED(IDirectInput8_CreateDevice(_glfw.win32.dinput8.api,
-                                          di->guidInstance,
+                                          &di->guidInstance,
                                           &device,
                                           NULL)))
     {
@@ -576,7 +576,7 @@ GLFWbool _glfwInitJoysticksWin32(void)
     {
         if (FAILED(DirectInput8Create(GetModuleHandle(NULL),
                                       DIRECTINPUT_VERSION,
-                                      IID_IDirectInput8W,
+                                      &IID_IDirectInput8W,
                                       (void**) &_glfw.win32.dinput8.api,
                                       NULL)))
         {
