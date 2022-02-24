@@ -175,7 +175,7 @@ char* _glfw_strdup(const char* source)
 {
     const size_t length = strlen(source);
     char* result = _glfw_calloc(length + 1, 1);
-    strcpy(result, source);
+    strcpy_s(result, length, source);
     return result;
 }
 
@@ -281,35 +281,35 @@ void _glfwInputError(int code, const char* format, ...)
     else
     {
         if (code == GLFW_NOT_INITIALIZED)
-            strcpy(description, "The GLFW library is not initialized");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The GLFW library is not initialized");
         else if (code == GLFW_NO_CURRENT_CONTEXT)
-            strcpy(description, "There is no current context");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "There is no current context");
         else if (code == GLFW_INVALID_ENUM)
-            strcpy(description, "Invalid argument for enum parameter");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Invalid argument for enum parameter");
         else if (code == GLFW_INVALID_VALUE)
-            strcpy(description, "Invalid value for parameter");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Invalid value for parameter");
         else if (code == GLFW_OUT_OF_MEMORY)
-            strcpy(description, "Out of memory");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Out of memory");
         else if (code == GLFW_API_UNAVAILABLE)
-            strcpy(description, "The requested API is unavailable");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested API is unavailable");
         else if (code == GLFW_VERSION_UNAVAILABLE)
-            strcpy(description, "The requested API version is unavailable");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested API version is unavailable");
         else if (code == GLFW_PLATFORM_ERROR)
-            strcpy(description, "A platform-specific error occurred");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "A platform-specific error occurred");
         else if (code == GLFW_FORMAT_UNAVAILABLE)
-            strcpy(description, "The requested format is unavailable");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested format is unavailable");
         else if (code == GLFW_NO_WINDOW_CONTEXT)
-            strcpy(description, "The specified window has no context");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The specified window has no context");
         else if (code == GLFW_CURSOR_UNAVAILABLE)
-            strcpy(description, "The specified cursor shape is unavailable");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The specified cursor shape is unavailable");
         else if (code == GLFW_FEATURE_UNAVAILABLE)
-            strcpy(description, "The requested feature cannot be implemented for this platform");
+			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested feature cannot be implemented for this platform");
         else if (code == GLFW_FEATURE_UNIMPLEMENTED)
-            strcpy(description, "The requested feature has not yet been implemented for this platform");
+			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested feature has not yet been implemented for this platform");
         else if (code == GLFW_PLATFORM_UNAVAILABLE)
-            strcpy(description, "The requested platform is unavailable");
+			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested platform is unavailable");
         else
-            strcpy(description, "ERROR: UNKNOWN GLFW ERROR");
+            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "ERROR: UNKNOWN GLFW ERROR");
     }
 
     if (_glfw.initialized)
@@ -329,7 +329,7 @@ void _glfwInputError(int code, const char* format, ...)
         error = &_glfwMainThreadError;
 
     error->code = code;
-    strcpy(error->description, description);
+    strcpy_s(error->description, _GLFW_MESSAGE_SIZE-1, description);
 
     if (_glfwErrorCallback)
         _glfwErrorCallback(code, description);
