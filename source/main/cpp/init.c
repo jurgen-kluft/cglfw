@@ -35,6 +35,9 @@
 #include <stdarg.h>
 #include <assert.h>
 
+#if !defined(_GLFW_WIN32)
+    #define strcpy_s(dst, size, src) strcpy(dst, src)
+#endif
 
 // NOTE: The global variables below comprise all mutable global data in GLFW
 //       Any other mutable global variable is a bug
