@@ -26,7 +26,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
-#include "libglfw/internal.h"
+#include "cglfw/internal.h"
 
 #include <assert.h>
 #include <errno.h>
@@ -40,21 +40,21 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "libglfw/wayland-client-protocol.h"
-#include "libglfw/wayland-xdg-shell-client-protocol.h"
-#include "libglfw/wayland-xdg-decoration-client-protocol.h"
-#include "libglfw/wayland-viewporter-client-protocol.h"
-#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol.h"
-#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol.h"
-#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol.h"
+#include "cglfw/wayland-client-protocol.h"
+#include "cglfw/wayland-xdg-shell-client-protocol.h"
+#include "cglfw/wayland-xdg-decoration-client-protocol.h"
+#include "cglfw/wayland-viewporter-client-protocol.h"
+#include "cglfw/wayland-relative-pointer-unstable-v1-client-protocol.h"
+#include "cglfw/wayland-pointer-constraints-unstable-v1-client-protocol.h"
+#include "cglfw/wayland-idle-inhibit-unstable-v1-client-protocol.h"
 
-#include "libglfw/wayland-client-protocol-code.h"
-#include "libglfw/wayland-xdg-shell-client-protocol-code.h"
-#include "libglfw/wayland-xdg-decoration-client-protocol-code.h"
-#include "libglfw/wayland-viewporter-client-protocol-code.h"
-#include "libglfw/wayland-relative-pointer-unstable-v1-client-protocol-code.h"
-#include "libglfw/wayland-pointer-constraints-unstable-v1-client-protocol-code.h"
-#include "libglfw/wayland-idle-inhibit-unstable-v1-client-protocol-code.h"
+#include "cglfw/wayland-client-protocol-code.h"
+#include "cglfw/wayland-xdg-shell-client-protocol-code.h"
+#include "cglfw/wayland-xdg-decoration-client-protocol-code.h"
+#include "cglfw/wayland-viewporter-client-protocol-code.h"
+#include "cglfw/wayland-relative-pointer-unstable-v1-client-protocol-code.h"
+#include "cglfw/wayland-pointer-constraints-unstable-v1-client-protocol-code.h"
+#include "cglfw/wayland-idle-inhibit-unstable-v1-client-protocol-code.h"
 
 
 static inline int min(int n1, int n2)

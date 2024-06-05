@@ -27,7 +27,7 @@
 // It is fine to use C99 in this file because it will not be built with VS
 //========================================================================
 
-#include "libglfw/internal.h"
+#include "cglfw/internal.h"
 
 #include <string.h>
 #include <stdlib.h>

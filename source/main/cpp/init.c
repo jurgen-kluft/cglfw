@@ -1,5 +1,5 @@
 //========================================================================
-// GLFW 3.4 - www.glfw.org
+// GLFW 3.5 - www.glfw.org
 //------------------------------------------------------------------------
 // Copyright (c) 2002-2006 Marcus Geelnard
 // Copyright (c) 2006-2018 Camilla Löwy <elmindreda@glfw.org>
@@ -24,10 +24,8 @@
 //    distribution.
 //
 //========================================================================
-// Please use C89 style variable declarations in this file because VS 2010
-//========================================================================
 
-#include "libglfw/internal.h"
+#include "cglfw/internal.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -35,9 +33,6 @@
 #include <stdarg.h>
 #include <assert.h>
 
-#if !defined(_GLFW_WIN32)
-    #define strcpy_s(dst, size, src) strcpy(dst, src)
-#endif
 
 // NOTE: The global variables below comprise all mutable global data in GLFW
 //       Any other mutable global variable is a bug
@@ -54,16 +49,22 @@ static GLFWerrorfun _glfwErrorCallback;
 static GLFWallocator _glfwInitAllocator;
 static _GLFWinitconfig _glfwInitHints =
 {
-    GLFW_TRUE,      // hat buttons
-    GLFW_ANGLE_PLATFORM_TYPE_NONE, // ANGLE backend
-    GLFW_ANY_PLATFORM, // preferred platform
-    NULL,           // vkGetInstanceProcAddr function
+    .hatButtons = GLFW_TRUE,
+    .angleType = GLFW_ANGLE_PLATFORM_TYPE_NONE,
+    .platformID = GLFW_ANY_PLATFORM,
+    .vulkanLoader = NULL,
+    .ns =
     {
-        GLFW_TRUE,  // macOS menu bar
-        GLFW_TRUE   // macOS bundle chdir
+        .menubar = GLFW_TRUE,
+        .chdir = GLFW_TRUE
     },
+    .x11 =
     {
-        GLFW_TRUE,  // X11 XCB Vulkan surface
+        .xcbVulkanSurface = GLFW_TRUE,
+    },
+    .wl =
+    {
+        .libdecorMode = GLFW_WAYLAND_PREFER_LIBDECOR
     },
 };
 
@@ -174,36 +175,75 @@ size_t _glfwEncodeUTF8(char* s, uint32_t codepoint)
     return count;
 }
 
+// Splits and translates a text/uri-list into separate file paths
+// NOTE: This function destroys the provided string
+//
+char** _glfwParseUriList(char* text, int* count)
+{
+    const char* prefix = "file://";
+    char** paths = NULL;
+    char* line;
+
+    *count = 0;
+
+    while ((line = strtok(text, "\r\n")))
+    {
+        char* path;
+
+        text = NULL;
+
+        if (line[0] == '#')
+            continue;
+
+        if (strncmp(line, prefix, strlen(prefix)) == 0)
+        {
+            line += strlen(prefix);
+            // TODO: Validate hostname
+            while (*line != '/')
+                line++;
+        }
+
+        (*count)++;
+
+        path = _glfw_calloc(strlen(line) + 1, 1);
+        paths = _glfw_realloc(paths, *count * sizeof(char*));
+        paths[*count - 1] = path;
+
+        while (*line)
+        {
+            if (line[0] == '%' && line[1] && line[2])
+            {
+                const char digits[3] = { line[1], line[2], '\0' };
+                *path = (char) strtol(digits, NULL, 16);
+                line += 2;
+            }
+            else
+                *path = *line;
+
+            path++;
+            line++;
+        }
+    }
+
+    return paths;
+}
+
 char* _glfw_strdup(const char* source)
 {
     const size_t length = strlen(source);
     char* result = _glfw_calloc(length + 1, 1);
-    strcpy_s(result, length, source);
+    strcpy(result, source);
     return result;
 }
 
-float _glfw_fminf(float a, float b)
+int _glfw_min(int a, int b)
 {
-    if (a != a)
-        return b;
-    else if (b != b)
-        return a;
-    else if (a < b)
-        return a;
-    else
-        return b;
+    return a < b ? a : b;
 }
 
-float _glfw_fmaxf(float a, float b)
+int _glfw_max(int a, int b)
 {
-    if (a != a)
-        return b;
-    else if (b != b)
-        return a;
-    else if (a > b)
-        return a;
-    else
-        return b;
+    return a > b ? a : b;
 }
 
 void* _glfw_calloc(size_t count, size_t size)
@@ -284,35 +324,35 @@ void _glfwInputError(int code, const char* format, ...)
     else
     {
         if (code == GLFW_NOT_INITIALIZED)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The GLFW library is not initialized");
+            strcpy(description, "The GLFW library is not initialized");
         else if (code == GLFW_NO_CURRENT_CONTEXT)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "There is no current context");
+            strcpy(description, "There is no current context");
         else if (code == GLFW_INVALID_ENUM)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Invalid argument for enum parameter");
+            strcpy(description, "Invalid argument for enum parameter");
         else if (code == GLFW_INVALID_VALUE)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Invalid value for parameter");
+            strcpy(description, "Invalid value for parameter");
         else if (code == GLFW_OUT_OF_MEMORY)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "Out of memory");
+            strcpy(description, "Out of memory");
         else if (code == GLFW_API_UNAVAILABLE)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested API is unavailable");
+            strcpy(description, "The requested API is unavailable");
         else if (code == GLFW_VERSION_UNAVAILABLE)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested API version is unavailable");
+            strcpy(description, "The requested API version is unavailable");
         else if (code == GLFW_PLATFORM_ERROR)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "A platform-specific error occurred");
+            strcpy(description, "A platform-specific error occurred");
         else if (code == GLFW_FORMAT_UNAVAILABLE)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested format is unavailable");
+            strcpy(description, "The requested format is unavailable");
         else if (code == GLFW_NO_WINDOW_CONTEXT)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The specified window has no context");
+            strcpy(description, "The specified window has no context");
         else if (code == GLFW_CURSOR_UNAVAILABLE)
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The specified cursor shape is unavailable");
+            strcpy(description, "The specified cursor shape is unavailable");
         else if (code == GLFW_FEATURE_UNAVAILABLE)
-			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested feature cannot be implemented for this platform");
+            strcpy(description, "The requested feature cannot be implemented for this platform");
         else if (code == GLFW_FEATURE_UNIMPLEMENTED)
-			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested feature has not yet been implemented for this platform");
+            strcpy(description, "The requested feature has not yet been implemented for this platform");
         else if (code == GLFW_PLATFORM_UNAVAILABLE)
-			strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "The requested platform is unavailable");
+            strcpy(description, "The requested platform is unavailable");
         else
-            strcpy_s(description, _GLFW_MESSAGE_SIZE-1, "ERROR: UNKNOWN GLFW ERROR");
+            strcpy(description, "ERROR: UNKNOWN GLFW ERROR");
     }
 
     if (_glfw.initialized)
@@ -332,7 +372,7 @@ void _glfwInputError(int code, const char* format, ...)
         error = &_glfwMainThreadError;
 
     error->code = code;
-    strcpy_s(error->description, _GLFW_MESSAGE_SIZE-1, description);
+    strcpy(error->description, description);
 
     if (_glfwErrorCallback)
         _glfwErrorCallback(code, description);
@@ -418,6 +458,9 @@ GLFWAPI void glfwInitHint(int hint, int value)
             return;
         case GLFW_X11_XCB_VULKAN_SURFACE:
             _glfwInitHints.x11.xcbVulkanSurface = value;
+            return;
+        case GLFW_WAYLAND_LIBDECOR:
+            _glfwInitHints.wl.libdecorMode = value;
             return;
     }
 

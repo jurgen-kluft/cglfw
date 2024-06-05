@@ -1,33 +1,29 @@
-package libglfw
+package cglfw
 
 import (
-	xbase "github.com/jurgen-kluft/xbase/package"
-	"github.com/jurgen-kluft/xcode/denv"
-	xentry "github.com/jurgen-kluft/xentry/package"
-	xunittest "github.com/jurgen-kluft/xunittest/package"
+	cbase "github.com/jurgen-kluft/cbase/package"
+	"github.com/jurgen-kluft/ccode/denv"
+	cunittest "github.com/jurgen-kluft/cunittest/package"
 )
 
-// GetPackage returns the package object of 'libglfw'
+// GetPackage returns the package object of 'cglfw'
 func GetPackage() *denv.Package {
 	// Dependencies
-	xunittestpkg := xunittest.GetPackage()
-	xentrypkg := xentry.GetPackage()
-	xbasepkg := xbase.GetPackage()
+	cunittestpkg := cunittest.GetPackage()
+	cbasepkg := cbase.GetPackage()
 
-	// The main (libglfw) package
-	mainpkg := denv.NewPackage("libglfw")
-	mainpkg.AddPackage(xentrypkg)
-	mainpkg.AddPackage(xbasepkg)
+	// The main (cglfw) package
+	mainpkg := denv.NewPackage("cglfw")
+	mainpkg.AddPackage(cbasepkg)
 
-	// 'libglfw' library
-	mainlib := denv.SetupDefaultCppLibProject("libglfw", "github.com\\jurgen-kluft\\libglfw")
-	mainlib.Dependencies = append(mainlib.Dependencies, xbasepkg.GetMainLib())
+	// 'cglfw' library
+	mainlib := denv.SetupDefaultCppLibProject("cglfw", "github.com\\jurgen-kluft\\cglfw")
+	mainlib.Dependencies = append(mainlib.Dependencies, cbasepkg.GetMainLib())
 
-	// 'libglfw' unittest project
-	maintest := denv.SetupDefaultCppTestProject("libglfw_test", "github.com\\jurgen-kluft\\libglfw")
-	maintest.Dependencies = append(maintest.Dependencies, xunittestpkg.GetMainLib())
-	maintest.Dependencies = append(maintest.Dependencies, xentrypkg.GetMainLib())
-	maintest.Dependencies = append(maintest.Dependencies, xbasepkg.GetMainLib())
+	// 'cglfw' unittest project
+	maintest := denv.SetupDefaultCppTestProject("cglfw"+"test", "github.com\\jurgen-kluft\\cglfw")
+	maintest.Dependencies = append(maintest.Dependencies, cunittestpkg.GetMainLib())
+	maintest.Dependencies = append(maintest.Dependencies, cbasepkg.GetMainLib())
 	maintest.Dependencies = append(maintest.Dependencies, mainlib)
 
 	if denv.OS == "windows" {

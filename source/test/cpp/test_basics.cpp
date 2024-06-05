@@ -1,9 +1,9 @@
-#include "xbase/x_target.h"
-#include "xbase/x_buffer.h"
+#include "ccore/c_target.h"
+#include "cbase/c_buffer.h"
 
-#include "xunittest/xunittest.h"
+#include "cunittest/cunittest.h"
 
-using namespace xcore;
+using namespace ncore;
 
 UNITTEST_SUITE_BEGIN(basics)
 {
