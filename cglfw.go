@@ -6,7 +6,9 @@ import (
 )
 
 func main() {
-	ccode.Init()
-	ccode.GenerateSpecificFiles(ccode.CLANGFORMAT | ccode.GITIGNORE)
-	ccode.Generate(pkg.GetPackage())
+	if ccode.Init() {
+		ccode.GenerateClangFormat()
+		ccode.GenerateGitIgnore()
+		ccode.Generate(pkg.GetPackage())
+	}
 }
