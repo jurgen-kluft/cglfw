@@ -26,13 +26,13 @@ func GetPackage() *denv.Package {
 	maintest.Dependencies = append(maintest.Dependencies, cbasepkg.GetMainLib())
 	maintest.Dependencies = append(maintest.Dependencies, mainlib)
 
-	if denv.OS == "windows" {
+	if denv.IsWindows() {
 		mainlib.AddDefine("_GLFW_WIN32;_GLFW_WGL;WIN32")
 		maintest.AddDefine("_GLFW_WIN32;_GLFW_WGL;WIN32")
-	} else if denv.OS == "darwin" {
+	} else if denv.IsMacOS() {
 		mainlib.AddDefine("_GLFW_COCOA;MACOSX")
 		maintest.AddDefine("_GLFW_COCOA;MACOSX")
-	} else if denv.OS == "linux" {
+	} else if denv.IsLinux() {
 		mainlib.AddDefine("_GLFW_X11;_GLFW_GFX;LINUX")
 		maintest.AddDefine("_GLFW_X11;_GLFW_GFX;LINUX")
 	}
