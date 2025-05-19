@@ -17,13 +17,13 @@ func GetPackage() *denv.Package {
 	mainpkg.AddPackage(cbasepkg)
 
 	// 'cglfw' library
-	mainlib := denv.SetupDefaultCppLibProject("cglfw", "github.com\\jurgen-kluft\\cglfw")
-	mainlib.Dependencies = append(mainlib.Dependencies, cbasepkg.GetMainLib())
+	mainlib := denv.SetupCppLibProject("cglfw", "github.com\\jurgen-kluft\\cglfw")
+	mainlib.AddDependencies(cbasepkg.GetMainLib()...)
 
 	// 'cglfw' unittest project
 	maintest := denv.SetupDefaultCppTestProject("cglfw"+"test", "github.com\\jurgen-kluft\\cglfw")
-	maintest.Dependencies = append(maintest.Dependencies, cunittestpkg.GetMainLib())
-	maintest.Dependencies = append(maintest.Dependencies, cbasepkg.GetMainLib())
+	maintest.AddDependencies(cunittestpkg.GetMainLib()...)
+	maintest.AddDependencies(cbasepkg.GetMainLib()...)
 	maintest.Dependencies = append(maintest.Dependencies, mainlib)
 
 	if denv.IsWindows() {
