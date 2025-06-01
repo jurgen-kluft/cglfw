@@ -13,18 +13,18 @@ func GetPackage() *denv.Package {
 	cbasepkg := cbase.GetPackage()
 
 	// The main (cglfw) package
-	mainpkg := denv.NewPackage("cglfw")
+	mainpkg := denv.NewPackage("github.com\\jurgen-kluft", "cglfw")
 	mainpkg.AddPackage(cbasepkg)
 
 	// 'cglfw' library
-	mainlib := denv.SetupCppLibProject("cglfw", "github.com\\jurgen-kluft\\cglfw")
+	mainlib := denv.SetupCppLibProject(mainpkg, "cglfw")
 	mainlib.AddDependencies(cbasepkg.GetMainLib()...)
 
 	// 'cglfw' unittest project
-	maintest := denv.SetupDefaultCppTestProject("cglfw"+"test", "github.com\\jurgen-kluft\\cglfw")
+	maintest := denv.SetupCppTestProject(mainpkg, "cglfw"+"test")
 	maintest.AddDependencies(cunittestpkg.GetMainLib()...)
 	maintest.AddDependencies(cbasepkg.GetMainLib()...)
-	maintest.Dependencies = append(maintest.Dependencies, mainlib)
+	maintest.AddDependency(mainlib)
 
 	if denv.IsWindows() {
 		mainlib.AddDefine("_GLFW_WIN32;_GLFW_WGL;WIN32")
