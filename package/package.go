@@ -24,10 +24,16 @@ func GetPackage() *denv.Package {
 	// 'cglfw' library
 	mainlib := denv.SetupCppLibProject(mainpkg, repo_name)
 	mainlib.AddDependencies(ccorepkg.GetMainLib())
+	if denv.IsMacOS() {
+		mainlib.AddSourceFiles("source/main", ".m")
+	}
 
 	// 'cglfw' library for testing
 	testlib := denv.SetupCppTestLibProject(mainpkg, repo_name)
 	testlib.AddDependencies(ccorepkg.GetTestLib())
+	if denv.IsMacOS() {
+		testlib.AddSourceFiles("source/main", ".m")
+	}
 
 	// 'cglfw' unittest project
 	maintest := denv.SetupCppTestProject(mainpkg, repo_name+"_test")
@@ -36,12 +42,15 @@ func GetPackage() *denv.Package {
 
 	if denv.IsWindows() {
 		mainlib.AddDefine("_GLFW_WIN32", "_GLFW_WGL", "WIN32")
+		testlib.AddDefine("_GLFW_WIN32", "_GLFW_WGL", "WIN32")
 		maintest.AddDefine("_GLFW_WIN32", "_GLFW_WGL", "WIN32")
 	} else if denv.IsMacOS() {
 		mainlib.AddDefine("_GLFW_COCOA", "MACOSX")
+		testlib.AddDefine("_GLFW_COCOA", "MACOSX")
 		maintest.AddDefine("_GLFW_COCOA", "MACOSX")
 	} else if denv.IsLinux() {
 		mainlib.AddDefine("_GLFW_X11", "_GLFW_GFX", "LINUX")
+		testlib.AddDefine("_GLFW_X11", "_GLFW_GFX", "LINUX")
 		maintest.AddDefine("_GLFW_X11", "_GLFW_GFX", "LINUX")
 	}
 

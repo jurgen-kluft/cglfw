@@ -798,8 +798,8 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
     }
     else
     {
-        if (wndconfig->xpos == GLFW_ANY_POSITION ||
-            wndconfig->ypos == GLFW_ANY_POSITION)
+        if (wndconfig->xpos == (int)GLFW_ANY_POSITION ||
+            wndconfig->ypos == (int)GLFW_ANY_POSITION)
         {
             contentRect = NSMakeRect(0, 0, wndconfig->width, wndconfig->height);
         }
@@ -839,8 +839,8 @@ static GLFWbool createNativeWindow(_GLFWwindow* window,
         [window->ns.object setLevel:NSMainMenuWindowLevel + 1];
     else
     {
-        if (wndconfig->xpos == GLFW_ANY_POSITION ||
-            wndconfig->ypos == GLFW_ANY_POSITION)
+        if (wndconfig->xpos == (int)GLFW_ANY_POSITION ||
+            wndconfig->ypos == (int)GLFW_ANY_POSITION)
         {
             [(NSWindow*) window->ns.object center];
             _glfw.ns.cascadePoint =

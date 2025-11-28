@@ -7,8 +7,9 @@ import (
 
 func main() {
 	if ccode.Init() {
+		p := pkg.GetPackage()
 		ccode.GenerateClangFormat()
-		ccode.GenerateGitIgnore()
-		ccode.Generate(pkg.GetPackage())
+		ccode.GenerateFiles(p)
+		ccode.Generate(p)
 	}
 }
