@@ -35,14 +35,14 @@ func GetPackage() *denv.Package {
 	maintest.AddDependency(testlib)
 
 	if denv.IsWindows() {
-		mainlib.AddDefine("_GLFW_WIN32;_GLFW_WGL;WIN32")
-		maintest.AddDefine("_GLFW_WIN32;_GLFW_WGL;WIN32")
+		mainlib.AddDefine("_GLFW_WIN32", "_GLFW_WGL", "WIN32")
+		maintest.AddDefine("_GLFW_WIN32", "_GLFW_WGL", "WIN32")
 	} else if denv.IsMacOS() {
-		mainlib.AddDefine("_GLFW_COCOA;MACOSX")
-		maintest.AddDefine("_GLFW_COCOA;MACOSX")
+		mainlib.AddDefine("_GLFW_COCOA", "MACOSX")
+		maintest.AddDefine("_GLFW_COCOA", "MACOSX")
 	} else if denv.IsLinux() {
-		mainlib.AddDefine("_GLFW_X11;_GLFW_GFX;LINUX")
-		maintest.AddDefine("_GLFW_X11;_GLFW_GFX;LINUX")
+		mainlib.AddDefine("_GLFW_X11", "_GLFW_GFX", "LINUX")
+		maintest.AddDefine("_GLFW_X11", "_GLFW_GFX", "LINUX")
 	}
 
 	mainpkg.AddMainLib(mainlib)
