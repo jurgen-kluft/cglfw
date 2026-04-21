@@ -25,14 +25,14 @@ func GetPackage() *denv.Package {
 	mainlib := denv.SetupCppLibProject(mainpkg, repo_name)
 	mainlib.AddDependencies(ccorepkg.GetMainLib())
 	if denv.IsMacOS() {
-		mainlib.AddSourceFiles("source/main", ".m")
+		mainlib.AddSourceFilesRecursively("source/main", ".m")
 	}
 
 	// 'cglfw' library for testing
 	testlib := denv.SetupCppTestLibProject(mainpkg, repo_name)
 	testlib.AddDependencies(ccorepkg.GetTestLib())
 	if denv.IsMacOS() {
-		testlib.AddSourceFiles("source/main", ".m")
+		testlib.AddSourceFilesRecursively("source/main", ".m")
 	}
 
 	// 'cglfw' unittest project
